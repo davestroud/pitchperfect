@@ -22,6 +22,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        recordingInProgress.text = "tap to record"
                 // Do any additional setup after loading the view, typically from a nib.
     }
 
