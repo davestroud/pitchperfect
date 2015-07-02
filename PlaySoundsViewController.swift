@@ -23,24 +23,29 @@ class PlaySoundsViewController: UIViewController {
         audioEngine = AVAudioEngine()
         audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
     }
-
-    @IBAction func playSlowAudio(sender: UIButton) {
+    
+    
+    func playerSpeed(customRate: Float)  {
         audioPlayer.stop()
-        audioPlayer.rate = 0.5
+        audioPlayer.rate = customRate
         audioPlayer.currentTime = 0
         audioPlayer.play()
     }
+
+    @IBAction func playSlowAudio(sender: UIButton) {
+        stopAudio(sender)
+        playerSpeed(0.5)
+    }
     
     @IBAction func playFastAudio(sender: UIButton) {
-        audioPlayer.stop()
-        audioPlayer.rate = 1.5
-        audioPlayer.currentTime = 0
-        audioPlayer.play()
+        stopAudio(sender)
+        playerSpeed(2.0)
     }
     
     @IBAction func playChipmunkAudio(sender: UIButton) {
         playAudioWithVariablePitch(1000)
     }
+    
         func playAudioWithVariablePitch(pitch: Float)   {
             audioPlayer.stop()
             audioEngine.stop()
@@ -59,21 +64,22 @@ class PlaySoundsViewController: UIViewController {
            audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
             audioEngine.startAndReturnError(nil)
             
+            // plays the recorded sound
             audioPlayerNode.play()
     }
     
     @IBAction func playDarthVaderAudio(sender: UIButton) {
         playAudioWithVariablePitch(-1000)
+
     }
-    
     
     @IBAction func stopAudio(sender: UIButton) {
         audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
