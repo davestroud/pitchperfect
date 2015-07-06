@@ -17,9 +17,7 @@ class PlaySoundsViewController: UIViewController {
     var audioFile:AVAudioFile!
     
     override func viewDidLoad() {
-        
         // sets up the view and plays the contents of the path
-        
         super.viewDidLoad()
         audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
         audioPlayer.enableRate = true
@@ -28,27 +26,20 @@ class PlaySoundsViewController: UIViewController {
     }
     
     func playerSpeed(customRate: Float)  {
-        
         // sets the playing speed for playSlowAudion and PlayFastAudio
-        
-        audioPlayer.stop()
         audioPlayer.rate = customRate
         audioPlayer.currentTime = 0
         audioPlayer.play()
     }
 
     @IBAction func playSlowAudio(sender: UIButton) {
-        
         // plays audio slow
-        
         stopAudio(sender)
         playerSpeed(0.5)
     }
     
     @IBAction func playFastAudio(sender: UIButton) {    
-        
         // plays audio fast
-        
         stopAudio(sender)
         playerSpeed(2.0)
     }
@@ -62,9 +53,7 @@ class PlaySoundsViewController: UIViewController {
     }
     
     func playAudioWithVariablePitch(pitch: Float)   {
-        
         // allows audio to be played and variable pitches
-        
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
@@ -87,9 +76,7 @@ class PlaySoundsViewController: UIViewController {
     }
 
     @IBAction func stopAudio(sender: UIButton) {
-        
         // stops the audioPlayer and audioEngine
-        
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
