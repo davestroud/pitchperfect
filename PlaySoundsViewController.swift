@@ -54,9 +54,7 @@ class PlaySoundsViewController: UIViewController {
     
     func playAudioWithVariablePitch(pitch: Float)   {
         // allows audio to be played and variable pitches
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+       stopAudio(self)
         
         var audioPlayerNode  = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
@@ -75,7 +73,7 @@ class PlaySoundsViewController: UIViewController {
         audioPlayerNode.play()
     }
 
-    @IBAction func stopAudio(sender: UIButton) {
+    @IBAction func stopAudio(sender: AnyObject) {
         // stops the audioPlayer and audioEngine
         audioPlayer.stop()
         audioEngine.stop()
