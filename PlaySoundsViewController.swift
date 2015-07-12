@@ -52,6 +52,13 @@ class PlaySoundsViewController: UIViewController {
         playAudioWithVariablePitch(-1000)
     }
     
+    @IBAction func playEchoAudio(sender: UIButton) {
+        // Play an echo of the recorded sound by delaying the sound
+        var delaySoundEffect = AVAudioUnitDelay()
+        delaySoundEffect.delayTime = 0.5
+        playAudioWithSoundEffect(delaySoundEffect)
+    }
+    
     func playAudioWithVariablePitch(pitch: Float)   {
         // allows audio to be played and variable pitches
        stopAudio(self)
