@@ -19,10 +19,10 @@ class PlaySoundsViewController: UIViewController {
     override func viewDidLoad() {
         // sets up the view and plays the contents of the path
         super.viewDidLoad()
-        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
         audioEngine = AVAudioEngine()
-        audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl)
     }
     
     func playerSpeed(customRate: Float)  {
@@ -68,7 +68,10 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        audioEngine.startAndReturnError(nil)
+        do {
+            try audioEngine.startAndReturnError()
+        } catch _ {
+        }
         
         // plays the recorded sound
         audioPlayerNode.play()
